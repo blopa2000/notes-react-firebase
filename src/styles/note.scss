@@ -1,0 +1,52 @@
+.content-card-note {
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  display: inline-block;
+  margin: 20px;
+  position: relative;
+  width: 240px;
+  cursor: pointer;
+  
+  &:hover {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  .card-note {
+    max-height: 500px;
+    overflow: hidden;
+  }
+  
+
+  .content-card-title {
+
+    .content-card-note-title {
+      margin: 10px 0px 0px;
+    }
+    
+
+    .contente-card-note-date{
+      position: absolute;
+      top: 6px;
+      right: 26px;
+      font-size: 12px;
+      color: #ccc;
+    }
+    
+  }
+
+  .content-card-icons {
+    display: flex;
+    justify-content: flex-end;
+    div {
+      margin-left: 10px;  
+    }
+    opacity: 0;
+    transition: ease-in-out 0.2s;
+  }
+
+  &:hover .content-card-icons {
+    opacity: 1;
+  }
+}
