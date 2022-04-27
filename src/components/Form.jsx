@@ -1,5 +1,5 @@
 import { useAuth } from "../context/context";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
 import "../styles/form.scss";
@@ -14,6 +14,8 @@ const Form = () => {
       await addDoc(collection(db, "users", user.uid, "notes"), {
         title: title.value,
         content: content.value,
+        creationDate: Timestamp.now(),
+        timestamp: serverTimestamp(),
       });
 
       title.value = "";
