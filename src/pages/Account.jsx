@@ -1,10 +1,10 @@
-import { useAuth } from "../context/context";
+import { useGlobalContext } from "../context/context";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import "../styles/login.scss";
 
 const Account = ({ isLogin = true }) => {
-  const { login, signup, user, loading } = useAuth();
   const navigate = useNavigate();
+  const { login, signup, loading, user } = useGlobalContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

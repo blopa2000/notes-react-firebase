@@ -1,30 +1,31 @@
-import { useContext, createContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { useContext, createContext, useState, useEffect, useReducer } from "react";
+import { auth, db } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
+import { Reducers, initialState } from "./Reducers";
+import { signInRequest, signupRequest, signOutRequest } from "../services/auth";
+import { getNotasRequest, deleteNoteRequest, addNoteRequest } from "../services/notes";
 
 const context = createContext();
 
 //HOOK
-export const useAuth = () => useContext(context);
+export const useGlobalContext = () => useContext(context);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [state, dispatch] = useReducer(Reducers, initialState);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         const res = await getDoc(doc(db, "users", currentUser.uid));
-        setUser({
-          uid: currentUser.uid,
-          ...res.data(),
+        dispatch({
+          type: "ADD_USER",
+          payload: {
+            uid: currentUser.uid,
+            ...res.data(),
+          },
         });
       }
       setLoading(false);
@@ -33,16 +34,78 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const signup = async (email, password, name) => {
-    const { user } = await createUserWithEmailAndPassword(auth, email, password);
-    return await setDoc(doc(db, "users", user.uid), { email, name });
+  useEffect(() => {
+    (async () => {
+      if (!state.user) return;
+      const res = await getNotasRequest(state.user);
+      getNotes(res);
+    })();
+  }, [state.user]);
+
+  /**
+   * NOTES
+   * @param {*} payload
+   */
+
+  const getNotes = (payload) => {
+    dispatch({ type: "GET_NOTES", payload });
   };
 
-  const login = (email, passwork) => signInWithEmailAndPassword(auth, email, passwork);
+  const addNote = async (title, content) => {
+    setLoading(true);
+    const addNote = await addNoteRequest(state.user, title, content);
 
-  const logout = () => signOut(auth);
+    if (addNote) {
+      const res = await getNotasRequest(state.user);
+      getNotes(res);
+      setLoading(false);
+      return true;
+    } else {
+      setLoading(false);
+      return false;
+    }
+  };
+
+  const deleteNote = async (noteId) => {
+    const res = await deleteNoteRequest(state.user, noteId);
+    if (res) {
+      dispatch({ type: "DELETE_NOTE", payload: noteId });
+    } else {
+      //error
+    }
+  };
+
+  /**
+   * USER
+   * @param {*} email
+   * @param {*} passwod
+   * @param {*} name
+   * @returns
+   */
+
+  const signup = (email, passwod, name) => signupRequest(email, passwod, name);
+
+  const login = (email, passwork) => signInRequest(email, passwork);
+
+  const logout = () => {
+    dispatch({ type: "DELETE_USER" });
+    signOutRequest();
+  };
+
+  const Account = {
+    signup,
+    login,
+    logout,
+  };
+
+  const Notes = {
+    addNote,
+    deleteNote,
+  };
 
   return (
-    <context.Provider value={{ user, login, loading, logout, signup }}>{children}</context.Provider>
+    <context.Provider value={{ ...state, loading, ...Account, ...Notes }}>
+      {children}
+    </context.Provider>
   );
 };

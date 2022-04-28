@@ -1,38 +1,30 @@
+import { MdDeleteForever, MdOutlineImage, MdOutlineColorLens } from "react-icons/md";
+import { useGlobalContext } from "../context/context";
 import "../styles/note.scss";
 
-const Note = () => {
+const Note = ({ noteId, title, content, date }) => {
+  const { deleteNote } = useGlobalContext();
   return (
     <>
       <div className="content-card-note">
         <div className="card-note">
           <header className="content-card-title">
-            <h1 className="content-card-note-title">New Note</h1>
-            <p className="contente-card-note-date">23 july 2022</p>
+            <h1 className="content-card-note-title">{title}</h1>
+            <p className="contente-card-note-date">{date}</p>
           </header>
-          <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <ul>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, ullam.</li>
-            </ul>
-          </div>
+          <div className="content-card-note-content">{content}</div>
         </div>
 
         <div className="content-card-icons">
-          <div>color</div>
-          <div>img</div>
-          <div>eliminar</div>
+          <button>
+            <MdOutlineImage />
+          </button>
+          <button>
+            <MdOutlineColorLens />
+          </button>
+          <button onClick={() => deleteNote(noteId)}>
+            <MdDeleteForever />
+          </button>
         </div>
       </div>
     </>
