@@ -1,24 +1,23 @@
 import { useGlobalContext } from "../context/context";
-import { addNoteRequest } from "../services/notes";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/form.scss";
 
 const Form = () => {
   const navigate = useNavigate();
-  const { user, addNote } = useGlobalContext();
+  const { addNote } = useGlobalContext();
 
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       const { title, content } = e.target.elements;
-      const res = await addNoteRequest(user, { title, content });
-
-      if (!res) throw new Error("Error al agregar la nota");
+      const res = await addNote(title, content);
 
       title.value = "";
       content.value = "";
-      await addNote();
+
+      if (!res) throw new Error("Error al agregar la nota");
+
       navigate("/");
     } catch (error) {
       //errors are handled

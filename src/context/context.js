@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { Reducers, initialState } from "./Reducers";
 import { signInRequest, signupRequest, signOutRequest } from "../services/auth";
-import { getNotasRequest, deleteNoteRequest } from "../services/notes";
+import { getNotasRequest, deleteNoteRequest, addNoteRequest } from "../services/notes";
 
 const context = createContext();
 
@@ -51,11 +51,19 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: "GET_NOTES", payload });
   };
 
-  const addNote = async () => {
+  const addNote = async (title, content) => {
     setLoading(true);
-    const res = await getNotasRequest(state.user);
-    getNotes(res);
-    setLoading(false);
+    const addNote = await addNoteRequest(state.user, title, content);
+
+    if (addNote) {
+      const res = await getNotasRequest(state.user);
+      getNotes(res);
+      setLoading(false);
+      return true;
+    } else {
+      setLoading(false);
+      return false;
+    }
   };
 
   const deleteNote = async (noteId) => {

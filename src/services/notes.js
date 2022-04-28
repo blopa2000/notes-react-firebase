@@ -32,7 +32,7 @@ export const getNotasRequest = async (user) => {
   }
 };
 
-export const addNoteRequest = async (user, { title, content }) => {
+export const addNoteRequest = async (user, title, content) => {
   try {
     await addDoc(collection(db, "users", user.uid, "notes"), {
       title: title.value,
