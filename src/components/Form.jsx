@@ -6,10 +6,7 @@ import "../styles/form.scss";
 
 const Form = () => {
   const navigate = useNavigate();
-  const {
-    state: { user },
-    addNote,
-  } = useGlobalContext();
+  const { user, addNote } = useGlobalContext();
 
   const handleSave = async (e) => {
     e.preventDefault();

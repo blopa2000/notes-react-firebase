@@ -4,12 +4,7 @@ import "../styles/login.scss";
 
 const Account = ({ isLogin = true }) => {
   const navigate = useNavigate();
-  const {
-    login,
-    signup,
-    loading,
-    state: { user },
-  } = useGlobalContext();
+  const { login, signup, loading, user } = useGlobalContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

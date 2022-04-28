@@ -15,9 +15,7 @@ const Colums = {
 };
 
 const Home = () => {
-  const {
-    state: { notes },
-  } = useGlobalContext();
+  const { notes } = useGlobalContext();
 
   return (
     <>

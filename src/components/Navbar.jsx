@@ -4,10 +4,7 @@ import { useGlobalContext } from "../context/context";
 import "../styles/navbar.scss";
 
 const Navbar = () => {
-  const {
-    logout,
-    state: { user },
-  } = useGlobalContext();
+  const { logout, user } = useGlobalContext();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
