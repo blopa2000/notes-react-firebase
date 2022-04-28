@@ -8,10 +8,15 @@ import { Note } from "../components/Note";
 import "../styles/home.scss";
 
 const Colums = {
-  default: 4,
-  1100: 3,
-  700: 2,
-  500: 1,
+  default: 8,
+  2560: 7,
+  2325: 6,
+  2085: 5,
+  1900: 5,
+  1770: 4,
+  1250: 3,
+  940: 2,
+  645: 1,
 };
 
 const Home = () => {
