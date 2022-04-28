@@ -1,9 +1,9 @@
 import { Navbar } from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { useAuth } from "../context/context";
+import { useGlobalContext } from "../context/context";
 
 const Layout = () => {
-  const { loading } = useAuth();
+  const { loading } = useGlobalContext();
 
   if (loading) return <p>Loading...</p>;
 

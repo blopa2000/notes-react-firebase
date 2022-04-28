@@ -1,27 +1,31 @@
-import { useAuth } from "../context/context";
-import { addDoc, collection, serverTimestamp, Timestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { useGlobalContext } from "../context/context";
+import { addNoteRequest } from "../services/notes";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/form.scss";
 
 const Form = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const {
+    state: { user },
+    addNote,
+  } = useGlobalContext();
 
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       const { title, content } = e.target.elements;
-      await addDoc(collection(db, "users", user.uid, "notes"), {
-        title: title.value,
-        content: content.value,
-        creationDate: Timestamp.now(),
-        timestamp: serverTimestamp(),
-      });
+      const res = await addNoteRequest(user, { title, content });
+
+      if (!res) throw new Error("Error al agregar la nota");
 
       title.value = "";
       content.value = "";
+      await addNote();
+      navigate("/");
     } catch (error) {
       //errors are handled
+      console.log(error);
     } finally {
       //with loading
     }
