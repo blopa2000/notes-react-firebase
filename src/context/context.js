@@ -5,7 +5,12 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { Reducers, initialState } from "./Reducers";
 import { signInRequest, signupRequest, signOutRequest } from "../services/auth";
-import { getNotasRequest, deleteNoteRequest, addNoteRequest } from "../services/notes";
+import {
+  getNotasRequest,
+  deleteNoteRequest,
+  addNoteRequest,
+  colorNoteRequest,
+} from "../services/notes";
 
 const context = createContext();
 
@@ -75,6 +80,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const noteColor = async (noteId, typeColor) => {
+    const res = await colorNoteRequest(state.user, noteId, typeColor);
+
+    if (res) {
+      dispatch({ type: "COLOR_NOTE", payload: { noteId, typeColor } });
+    }
+    return res;
+  };
+
   /**
    * USER
    * @param {*} email
@@ -101,6 +115,7 @@ export const AuthProvider = ({ children }) => {
   const Notes = {
     addNote,
     deleteNote,
+    noteColor,
   };
 
   return (

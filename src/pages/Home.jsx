@@ -1,5 +1,6 @@
 import { useGlobalContext } from "../context/context";
 import { Link } from "react-router-dom";
+import { IoMdAddCircle } from "react-icons/io";
 
 import Masonry from "react-masonry-css";
 
@@ -24,7 +25,18 @@ const Home = () => {
   return (
     <>
       <div className="container-home ">
-        <Link to="/add">add new note</Link>
+        <div className="link">
+          <Link to="/add" className="container-home-link-add-note">
+            <span id="span1" />
+            <span id="span2" />
+            <span id="span3" />
+            <span id="span4" />
+            <div className="content-link">
+              <IoMdAddCircle />
+              <p>add new note</p>
+            </div>
+          </Link>
+        </div>
         {notes.length === 0 && <div>no tienes notas agrega una</div>}
         <Masonry
           breakpointCols={Colums}
@@ -38,6 +50,8 @@ const Home = () => {
               title={note.title}
               content={note.content}
               date={note.date}
+              bgColor={note?.bgColor}
+              textColor={note?.textColor}
             />
           ))}
         </Masonry>

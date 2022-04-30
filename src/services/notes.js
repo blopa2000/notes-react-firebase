@@ -8,6 +8,7 @@ import {
   orderBy,
   Timestamp,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -50,6 +51,19 @@ export const addNoteRequest = async (user, title, content) => {
 export const deleteNoteRequest = async (user, noteId) => {
   try {
     await deleteDoc(doc(db, "users", user.uid, "notes", noteId));
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const colorNoteRequest = async (user, noteId, typeColor) => {
+  try {
+    await updateDoc(doc(db, "users", user.uid, "notes", noteId), {
+      bgColor: typeColor.bgColor,
+      textColor: typeColor.textColor,
+    });
     return true;
   } catch (error) {
     console.log(error);

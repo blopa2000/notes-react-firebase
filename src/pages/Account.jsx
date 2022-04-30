@@ -15,10 +15,9 @@ const Account = ({ isLogin = true }) => {
       } else {
         await signup(email.value, password.value, name.value);
       }
+      navigate("/");
     } catch (error) {
       //errors are handled in the context
-    } finally {
-      navigate("/");
     }
   };
 
