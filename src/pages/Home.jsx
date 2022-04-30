@@ -44,15 +44,7 @@ const Home = () => {
           columnClassName="my-masonry-grid_column"
         >
           {notes.map((note, index) => (
-            <Note
-              key={index}
-              noteId={note.noteId}
-              title={note.title}
-              content={note.content}
-              date={note.date}
-              bgColor={note?.bgColor}
-              textColor={note?.textColor}
-            />
+            <Note key={index} note={note} />
           ))}
         </Masonry>
       </div>

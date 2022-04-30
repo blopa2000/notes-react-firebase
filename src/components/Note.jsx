@@ -7,7 +7,8 @@ import { Popover } from "./Popover";
 
 import "../styles/note.scss";
 
-const Note = ({ noteId, title, content, date, bgColor, textColor }) => {
+const Note = ({ note }) => {
+  const { noteId, title, content, date, bgColor, textColor } = note;
   const { deleteNote, noteColor } = useGlobalContext();
   const [active, setActive] = useState(false);
   const ref = useRef(null);
