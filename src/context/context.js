@@ -89,6 +89,13 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
+  const selectNote = (payload) => {
+    dispatch({
+      type: "SELECT_NOTE",
+      payload,
+    });
+  };
+
   /**
    * USER
    * @param {*} email
@@ -116,6 +123,7 @@ export const AuthProvider = ({ children }) => {
     addNote,
     deleteNote,
     noteColor,
+    selectNote,
   };
 
   return (

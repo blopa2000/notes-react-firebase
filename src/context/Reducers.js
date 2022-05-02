@@ -1,6 +1,11 @@
 export const initialState = {
   user: null,
   notes: [],
+  selectNoteEdit: {
+    nodeId: "",
+    title: "",
+    content: "",
+  },
 };
 
 export const Reducers = (state, { type, payload }) => {
@@ -38,6 +43,12 @@ export const Reducers = (state, { type, payload }) => {
           }
           return note;
         }),
+      };
+
+    case "SELECT_NOTE":
+      return {
+        ...state,
+        selectNoteEdit: payload,
       };
 
     default:

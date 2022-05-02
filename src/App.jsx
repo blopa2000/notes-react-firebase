@@ -33,6 +33,15 @@ function App() {
                 </Privateroute>
               }
             />
+
+            <Route
+              path="edit"
+              element={
+                <Privateroute>
+                  <FormNote />
+                </Privateroute>
+              }
+            />
           </Route>
           <Route path="/login" element={<Account />} />
           <Route path="/signup" element={<Account isLogin={false} />} />

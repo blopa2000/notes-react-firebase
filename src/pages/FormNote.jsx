@@ -3,9 +3,9 @@ import { Form } from "../components/Form";
 
 const FormNote = () => {
   return (
-    <div>
+    <>
       <Form />
-    </div>
+    </>
   );
 };
 

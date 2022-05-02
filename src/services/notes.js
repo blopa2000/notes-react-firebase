@@ -37,7 +37,7 @@ export const addNoteRequest = async (user, title, content) => {
   try {
     await addDoc(collection(db, "users", user.uid, "notes"), {
       title: title.value,
-      content: content.value,
+      content,
       creationDate: Timestamp.now(),
       timestamp: serverTimestamp(),
     });
