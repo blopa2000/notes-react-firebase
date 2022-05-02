@@ -25,6 +25,21 @@ export const Reducers = (state, { type, payload }) => {
         ...state,
         notes: state.notes.filter((note) => note.noteId !== payload),
       };
+    case "COLOR_NOTE":
+      return {
+        ...state,
+        notes: state.notes.map((note) => {
+          if (note.noteId === payload.noteId) {
+            return {
+              ...note,
+              bgColor: payload.typeColor.bgColor,
+              textColor: payload.typeColor.textColor,
+            };
+          }
+          return note;
+        }),
+      };
+
     default:
       return state;
   }

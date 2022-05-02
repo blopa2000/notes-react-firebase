@@ -3,29 +3,111 @@
   @media (max-width: 1170px) {
     margin:1em;
   }
-}
 
-.my-masonry-grid {
-  display: flex;
-  margin: 2em 10em;
-  width: auto;
-  transition: ease-in-out .25s;
+  .link{
+    display: flex;
+    justify-content: flex-end;
+  }
 
-  @media  (max-width: 1500px) {
-    margin: 2em 1em;
+  .container-home-link-add-note{
+    text-decoration: none;
+    text-transform: capitalize;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: 0.2s;
+
+    span {
+      position: absolute;
+      display: block;
+    }
+    #span1 {
+      top: 0;
+      left: -175px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg,transparent,#a945c7);
+    }
+
+    &:hover #span1 {
+      left: 100%;
+      transition: 1s;
+    }
+
+    #span2 {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #a945c7);
+    }
+    
+    &:hover #span2 {
+      top: 100%;
+      transition: 1s;
+      transition-delay: 0.25s;
+    }
+
+    #span3 {
+      bottom:  0;
+      right: -175px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #a945c7);
+    }
+    
+    &:hover #span3 {
+      right: 100%;
+      transition: 1s;
+      transition-delay: 0.5s;
+    }
+
+    #span4 {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #a945c7);
+    }
+    
+    &:hover #span4 {
+      bottom: 100%;
+      transition: 1s;
+      transition-delay: 0.75s;
+    }
+
+    
+    .content-link {
+      display: flex;
+      align-items: center;
+      p {
+        margin-left: 0.5em;
+      
+      }
+    }
+  }
+
+  .my-masonry-grid {
+    display: flex;
+    margin: 2em 10em;
+    width: auto;
+    transition: ease-in-out .25s;
+  
+    @media  (max-width: 1500px) {
+      margin: 2em 1em;
+    }
+    
   }
   
-}
-
-.my-masonry-grid_column {
-  padding-left: 10px;
-  background-clip: padding-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (max-width: 1170px) {
-    padding: 0;
+  .my-masonry-grid_column {
+    padding-left: 10px;
+    background-clip: padding-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 1170px) {
+      padding: 0;
+    }
   }
 }
-
-

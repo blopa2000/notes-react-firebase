@@ -1,0 +1,40 @@
+.container-Popover {
+  position: absolute;
+  left: -4px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  width: 95%;
+  height:40px;
+  display: flex ;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  border: 1px solid #ccc;
+  box-shadow: 1px 5px 6px 0px rgb(0 0 0 / 10%);
+  
+
+  .container-Popover-btn-not-color{
+    background: none;
+    border: 0;
+    font-size: 22px;
+    padding: 0;
+    padding-top: 6px;
+    cursor: pointer;
+  }
+  
+  .Popover-color {
+    transition: all 0.2s ease-in-out;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    &:hover {
+      transform: scale(1.2);
+      border: 1px solid;
+      cursor: pointer;
+    }
+  }
+  .active {
+    border: 1px solid;
+  }
+}
