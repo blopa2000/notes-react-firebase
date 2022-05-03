@@ -10,15 +10,12 @@ export const initialState = {
 
 export const Reducers = (state, { type, payload }) => {
   switch (type) {
+    case "CLEAN_STATE":
+      return initialState;
     case "ADD_USER":
       return {
         ...state,
         user: payload,
-      };
-    case "DELETE_USER":
-      return {
-        ...state,
-        user: null,
       };
     case "GET_NOTES":
       return {
@@ -44,11 +41,15 @@ export const Reducers = (state, { type, payload }) => {
           return note;
         }),
       };
-
     case "SELECT_NOTE":
       return {
         ...state,
         selectNoteEdit: payload,
+      };
+    case "CLEAN_SELECT_NOTE":
+      return {
+        ...state,
+        selectNoteEdit: initialState.selectNoteEdit,
       };
 
     default:
