@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 
 import "../styles/navbar.scss";
@@ -14,7 +14,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <h1>Notes</h1>
+      <Link to="/" className="navbar-link">
+        <h1>Notes</h1>
+      </Link>
       <div className="navbar-info">
         <h3>{`Welcome ${user?.name[0].toUpperCase() + user?.name.slice(1)}`}</h3>
         <button onClick={() => handleLogout()}>|||</button>

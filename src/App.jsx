@@ -6,7 +6,7 @@ import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Account } from "./pages/Account";
 import { Notfound } from "./pages/NotFound";
-import { FormNote } from "./pages/FormNote";
+import { AddAndUpdateNotes } from "./pages/AddAndUpdateNotes";
 
 import "./styles/app.scss";
 
@@ -29,7 +29,16 @@ function App() {
               path="add"
               element={
                 <Privateroute>
-                  <FormNote />
+                  <AddAndUpdateNotes />
+                </Privateroute>
+              }
+            />
+
+            <Route
+              path="edit"
+              element={
+                <Privateroute>
+                  <AddAndUpdateNotes />
                 </Privateroute>
               }
             />

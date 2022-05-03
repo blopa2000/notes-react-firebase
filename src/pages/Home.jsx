@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../context/context";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import { useEffect } from "react";
 
 import Masonry from "react-masonry-css";
 
@@ -20,7 +21,11 @@ const Colums = {
 };
 
 const Home = () => {
-  const { notes } = useGlobalContext();
+  const { notes, CleanSelectNote } = useGlobalContext();
+
+  useEffect(() => {
+    CleanSelectNote();
+  }, [CleanSelectNote]);
 
   return (
     <>

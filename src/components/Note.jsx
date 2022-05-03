@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { MdDeleteForever, MdOutlineImage, MdOutlineColorLens } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { MdDeleteForever, MdOutlineColorLens } from "react-icons/md";
 import { useGlobalContext } from "../context/context";
 import { useOuterClick } from "../hooks/useOuterClick";
 
@@ -9,7 +10,8 @@ import "../styles/note.scss";
 
 const Note = ({ note }) => {
   const { noteId, title, content, date, bgColor, textColor } = note;
-  const { deleteNote, noteColor } = useGlobalContext();
+  const { deleteNote, noteColor, selectNote } = useGlobalContext();
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const ref = useRef(null);
 
@@ -24,23 +26,41 @@ const Note = ({ note }) => {
 
   return (
     <div className="content-card" ref={ref}>
-      <div className="content-card-note" style={bgColor ? { background: bgColor } : {}}>
+      <div
+        className="content-card-note"
+        style={bgColor ? { background: bgColor } : {}}
+        onClick={(e) => {
+          selectNote({ title, content, noteId });
+          navigate("/edit");
+        }}
+      >
         <div className="card-note" style={textColor ? { color: textColor } : {}}>
           <header className="content-card-title">
             <h1 className="content-card-note-title">{title}</h1>
             <p className="contente-card-note-date">{date}</p>
           </header>
-          <div className="content-card-note-content">{content}</div>
+          <div
+            className="content-card-note-content"
+            onClick={(e) => (e.target.tagName === "A" ? e.stopPropagation() : null)}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
 
         <div className="content-card-icons" style={active ? { opacity: 1 } : {}}>
-          <button>
-            <MdOutlineImage />
-          </button>
-          <button onClick={() => setActive(!active)}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActive(!active);
+            }}
+          >
             <MdOutlineColorLens />
           </button>
-          <button onClick={() => deleteNote(noteId)}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteNote(noteId);
+            }}
+          >
             <MdDeleteForever />
           </button>
         </div>

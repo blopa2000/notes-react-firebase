@@ -8,6 +8,9 @@
 #firebase
 /src/firebase.js
 
+#keys
+/src/keys.js
+
 # testing
 /coverage
 

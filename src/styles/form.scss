@@ -9,19 +9,123 @@
     padding: 20px;
     border-radius: 5px;
     background-color: #ffffff;
-    width: 50%;
+    width: 90%;
+    margin-top: 5vh;
+    @media screen and (max-width: 960PX) {
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0%;
+      margin-top: 0;
+      padding-top: 20px;
+    }
+      
+    
   }
 
   .content-form-card-title {
-    font-size: 1em;
+    font-size: 2em;
     font-weight: bold;
     margin: 0;
+    display: inline-block;
   }
 
   .content-form-card-form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    @media screen and (max-width: 960PX) {
+      padding: 10px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .container-home-link-add-note {
+        
+        position: relative;
+        display: inline-block;
+        letter-spacing: 4px;
+        overflow: hidden;
+        transition: 0.2s;
+        background: none;
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+        color: #a945c7;
+      
+        span {
+          position: absolute;
+          display: block;
+        }
+      
+        #span1 {
+          top: 0;
+          left: -175px;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #a945c7);
+        }
+      
+        &:hover #span1 {
+          left: 100%;
+          transition: 1s;
+        }
+      
+        #span2 {
+          top: -100%;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(180deg, transparent, #a945c7);
+        }
+      
+        &:hover #span2 {
+          top: 100%;
+          transition: 1s;
+        }
+      
+        #span3 {
+          bottom: 0;
+          right: -175px;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(270deg, transparent, #a945c7);
+        }
+      
+        &:hover #span3 {
+          right: 100%;
+          transition: 1s;
+        }
+      
+        #span4 {
+          bottom: -100%;
+          left: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(360deg, transparent, #a945c7);
+        }
+      
+        &:hover #span4 {
+          bottom: 100%;
+          transition: 1s;
+        }
+      
+      
+        .content-link {
+          display: flex;
+          align-items: center;
+          p {
+            text-transform: capitalize;
+            margin-left: 0.5em;
+      
+          }
+        }
+      }
+    }
   }
 
   .content-form-card-input {
@@ -29,12 +133,11 @@
     height: 40px;
     border-radius: 5px;
     border: 1px solid #cccccc;
-    padding: 0 10px;
     font-size: 1em;
     font-weight: bold;
     color: #757575;
     background-color: #ffffff;
-    width: 90%;
+    width: 99.5%;
   }
 
   .content-form-card-textarea {
@@ -51,3 +154,57 @@
 
 }
 
+textarea#mentions {
+  height: 50px;
+}
+
+div.card,
+.tox div.card {
+  width: 100%;
+  margin-top: 10px;
+  background: white;
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+div.card::after,
+.tox div.card::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+div.card h1,
+.tox div.card h1 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 8px;
+  padding: 0;
+  // line-height: normal;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+div.card p,
+.tox div.card p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+div.card img.avatar,
+.tox div.card img.avatar {
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+  float: left;
+}
+
+pre {
+  background: #f5f2f0;
+  padding: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 99.9604%;
+  border-width: 1px;
+  border-style: solid;
+}

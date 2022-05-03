@@ -36,8 +36,8 @@ export const getNotasRequest = async (user) => {
 export const addNoteRequest = async (user, title, content) => {
   try {
     await addDoc(collection(db, "users", user.uid, "notes"), {
-      title: title.value,
-      content: content.value,
+      title,
+      content,
       creationDate: Timestamp.now(),
       timestamp: serverTimestamp(),
     });
@@ -58,11 +58,11 @@ export const deleteNoteRequest = async (user, noteId) => {
   }
 };
 
-export const colorNoteRequest = async (user, noteId, typeColor) => {
+export const updateNoteRequest = async (user, noteId, data, timestamp = false) => {
   try {
+    if (timestamp) data.timestamp = serverTimestamp();
     await updateDoc(doc(db, "users", user.uid, "notes", noteId), {
-      bgColor: typeColor.bgColor,
-      textColor: typeColor.textColor,
+      ...data,
     });
     return true;
   } catch (error) {
