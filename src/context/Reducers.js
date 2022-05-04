@@ -17,6 +17,14 @@ export const Reducers = (state, { type, payload }) => {
         ...state,
         user: payload,
       };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...payload,
+        },
+      };
     case "GET_NOTES":
       return {
         ...state,

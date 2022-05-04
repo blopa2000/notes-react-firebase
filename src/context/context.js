@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 import { Reducers, initialState } from "./Reducers";
-import { signInRequest, signupRequest, signOutRequest } from "../services/auth";
+import { signInRequest, signupRequest, signOutRequest, updateUserRequest } from "../services/auth";
 import {
   getNotasRequest,
   deleteNoteRequest,
@@ -133,10 +133,23 @@ export const AuthProvider = ({ children }) => {
     signOutRequest();
   };
 
+  const updateUser = async (data) => {
+    setLoading(true);
+    const res = await updateUserRequest(state.user, data);
+    if (res) {
+      dispatch({ type: "UPDATE_USER", payload: data });
+      setLoading(false);
+      return true;
+    }
+    setLoading(false);
+    return false;
+  };
+
   const Account = {
     signup,
     login,
     logout,
+    updateUser,
   };
 
   const Notes = {

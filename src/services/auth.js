@@ -15,3 +15,12 @@ export const signInRequest = async (email, password) => {
 export const signOutRequest = async () => {
   return await signOut(auth);
 };
+
+export const updateUserRequest = async (user, dataUser) => {
+  try {
+    await setDoc(doc(db, "users", user.uid), { ...dataUser });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
