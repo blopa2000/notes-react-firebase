@@ -29,7 +29,7 @@ export const getNotasRequest = async (user) => {
 
     return auxNotes;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -43,7 +43,7 @@ export const addNoteRequest = async (user, title, content) => {
     });
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };
@@ -53,7 +53,7 @@ export const deleteNoteRequest = async (user, noteId) => {
     await deleteDoc(doc(db, "users", user.uid, "notes", noteId));
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };
@@ -66,7 +66,7 @@ export const updateNoteRequest = async (user, noteId, data, timestamp = false) =
     });
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };

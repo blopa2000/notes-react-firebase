@@ -59,16 +59,15 @@ export const AuthProvider = ({ children }) => {
 
   const addNote = async (title, content) => {
     setLoading(true);
-    const newNote = await addNoteRequest(state.user, title, content);
-
-    if (newNote) {
+    try {
+      await addNoteRequest(state.user, title, content);
       const res = await getNotasRequest(state.user);
       getNotes(res);
-      setLoading(false);
       return true;
-    } else {
-      setLoading(false);
+    } catch (error) {
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,14 +75,12 @@ export const AuthProvider = ({ children }) => {
     const res = await deleteNoteRequest(state.user, noteId);
     if (res) {
       dispatch({ type: "DELETE_NOTE", payload: noteId });
-    } else {
-      //error
     }
+    return res;
   };
 
   const noteColor = async (noteId, typeColor) => {
     const res = await updateNoteRequest(state.user, noteId, typeColor);
-
     if (res) {
       dispatch({ type: "COLOR_NOTE", payload: { noteId, typeColor } });
     }
@@ -92,15 +89,15 @@ export const AuthProvider = ({ children }) => {
 
   const updateNote = async (noteId, data) => {
     setLoading(true);
-    const resUpdateNote = await updateNoteRequest(state.user, noteId, data, true);
-    if (resUpdateNote) {
+    try {
+      await updateNoteRequest(state.user, noteId, data, true);
       const res = await getNotasRequest(state.user);
       getNotes(res);
-      setLoading(false);
       return true;
-    } else {
-      setLoading(false);
+    } catch (error) {
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,14 +133,15 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = async (data) => {
     setLoading(true);
-    const res = await updateUserRequest(state.user, data);
-    if (res) {
+    try {
+      await updateUserRequest(state.user, data);
       dispatch({ type: "UPDATE_USER", payload: data });
-      setLoading(false);
       return true;
+    } catch (error) {
+      return false;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-    return false;
   };
 
   const Account = {

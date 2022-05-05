@@ -8,7 +8,7 @@
   h1 {
     font-weight: bold;
     margin: 0;
-    font-family: "Courier New", Courier, monospace;
+    font-family: $fontFamily;
   }
 
   .lds-roller {
@@ -26,7 +26,7 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: rgb(0, 0, 0);
+        background: $primary;
         margin: -4px 0 0 -4px;
       }
       &:nth-child(1) {

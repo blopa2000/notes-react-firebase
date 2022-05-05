@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useOuterClick } from "../hooks/useOuterClick";
 
+import ReactJsAlert from "reactjs-alert";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { HiMenuAlt3 } from "react-icons/hi";
 import * as yup from "yup";
@@ -15,6 +16,11 @@ const Navbar = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const menuRef = useRef();
+  const [openAlert, setOpenAlert] = useState({
+    status: false,
+    title: "",
+    type: "",
+  });
 
   const handleLogout = async () => {
     await logout();
@@ -28,12 +34,20 @@ const Navbar = () => {
     setIsOpenModal(!isOpenModal);
   };
 
-  const handleSubmit = async (values, actions) => {
-    const res = await updateUser(values);
-    if (res) {
-      setIsOpenModal(false);
+  const handleSubmitNav = async (values, actions) => {
+    try {
+      const res = await updateUser(values);
+      if (!res) throw new Error("Error when trying to update the user");
       actions.setSubmitting(false);
+    } catch (error) {
+      console.error(openAlert);
+      setOpenAlert({
+        status: true,
+        title: error.message,
+        type: "error",
+      });
     }
+    setIsOpenModal(false);
   };
 
   return (
@@ -80,7 +94,7 @@ const Navbar = () => {
       <div className="navbar-spacing" />
 
       {isOpenModal && (
-        <Modal handleIsOpenModal={handleIsOpenModal}>
+        <Modal handleIsOpenModal={handleIsOpenModal} title="Settings">
           <Formik
             initialValues={{
               name: user.name,
@@ -88,7 +102,7 @@ const Navbar = () => {
             validationSchema={yup.object({
               name: yup.string().required("Name is required").max(20, "Name is too long"),
             })}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitNav}
             enableReinitialize={true}
           >
             {({ handleSubmit, setFieldValue, isSubmitting }) => (
@@ -115,6 +129,13 @@ const Navbar = () => {
           </Formik>
         </Modal>
       )}
+
+      <ReactJsAlert
+        status={openAlert.status}
+        type={openAlert.type}
+        title={openAlert.title}
+        Close={() => setOpenAlert({ ...openAlert, status: false })}
+      />
     </>
   );
 };

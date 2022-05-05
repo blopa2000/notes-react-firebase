@@ -16,10 +16,5 @@ export const signOutRequest = async () => {
 };
 
 export const updateUserRequest = async (user, dataUser) => {
-  try {
-    await setDoc(doc(db, "users", user.uid), { ...dataUser });
-    return true;
-  } catch (error) {
-    return false;
-  }
+  await setDoc(doc(db, "users", user.uid), { ...dataUser });
 };

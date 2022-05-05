@@ -1,6 +1,6 @@
 .btn {
   @extend %style-btn;
-
+  font-family: $fontFamily;
   span {
     position: absolute;
     display: block;

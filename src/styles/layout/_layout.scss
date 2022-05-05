@@ -15,3 +15,13 @@ table {
   border-width: 1px;
   border: 1px solid rgb(0, 0, 0);
 }
+
+.alert-wrapper {
+  h3 {
+    font-family: $fontFamily;
+  }
+  @media screen and (max-width: 768px) {
+    width: 66%!important;
+    margin: 0 auto;
+  }
+}

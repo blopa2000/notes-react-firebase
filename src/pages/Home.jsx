@@ -39,12 +39,13 @@ const Home = () => {
             </Button>
           </Link>
         </div>
-        {!notes.length === 0 && (
+        {notes.length === 0 && (
           <div className="container-home-message">
             <h1>You don't have a note, why not add one?</h1>
             <img src={img} alt="" />
           </div>
         )}
+
         <Masonry
           breakpointCols={Colums}
           className="masonry-grid"
