@@ -1,9 +1,10 @@
 import { useContext, createContext, useState, useEffect, useReducer, useCallback } from "react";
+import { Reducers, initialState } from "./Reducers";
+
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
-import { Reducers, initialState } from "./Reducers";
 import { signInRequest, signupRequest, signOutRequest, updateUserRequest } from "../services/auth";
 import {
   getNotasRequest,

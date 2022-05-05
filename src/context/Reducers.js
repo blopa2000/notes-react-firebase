@@ -12,6 +12,9 @@ export const Reducers = (state, { type, payload }) => {
   switch (type) {
     case "CLEAN_STATE":
       return initialState;
+    /**
+     * USER
+     */
     case "ADD_USER":
       return {
         ...state,
@@ -25,6 +28,9 @@ export const Reducers = (state, { type, payload }) => {
           ...payload,
         },
       };
+    /**
+     * NOTES
+     */
     case "GET_NOTES":
       return {
         ...state,

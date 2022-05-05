@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdDeleteForever, MdOutlineColorLens } from "react-icons/md";
 import { useGlobalContext } from "../context/context";
 import { useOuterClick } from "../hooks/useOuterClick";
 
-import { Popover } from "./Popover";
+import { MdDeleteForever, MdOutlineColorLens } from "react-icons/md";
 
-import "../styles/note.scss";
+import { Popover } from "./Popover";
 
 const Note = ({ note }) => {
   const { noteId, title, content, date, bgColor, textColor } = note;
@@ -25,28 +24,30 @@ const Note = ({ note }) => {
   };
 
   return (
-    <div className="content-card" ref={ref}>
+    <div className="container-card" ref={ref}>
       <div
-        className="content-card-note"
+        className="container-card-content"
         style={bgColor ? { background: bgColor } : {}}
         onClick={(e) => {
           selectNote({ title, content, noteId });
           navigate("/edit");
         }}
       >
-        <div className="card-note" style={textColor ? { color: textColor } : {}}>
-          <header className="content-card-title">
-            <h1 className="content-card-note-title">{title}</h1>
-            <p className="contente-card-note-date">{date}</p>
+        <div className="container-card-content-note " style={textColor ? { color: textColor } : {}}>
+          <header className="container-card-content-note-head">
+            <h1 className="note-title">{title}</h1>
+            <p className="note-date">{date}</p>
           </header>
           <div
-            className="content-card-note-content"
+            className={`container-card-content-note-body ${
+              bgColor === "#a088cc" || bgColor === "#cc88c4" ? "table" : ""
+            }`}
             onClick={(e) => (e.target.tagName === "A" ? e.stopPropagation() : null)}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
 
-        <div className="content-card-icons" style={active ? { opacity: 1 } : {}}>
+        <div className="container-card-content-icons" style={active ? { opacity: 1 } : {}}>
           <button
             onClick={(e) => {
               e.stopPropagation();

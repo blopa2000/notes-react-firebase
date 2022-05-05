@@ -1,16 +1,15 @@
-import { useGlobalContext } from "../context/context";
-import { useNavigate } from "react-router-dom";
-
-import { Editor } from "@tinymce/tinymce-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/context";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Editor } from "@tinymce/tinymce-react";
+import * as yup from "yup";
 
 import { KEYS } from "../keys";
 import { configEditor } from "../constants";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
-
-import "../styles/form.scss";
+import { Button } from "./Button";
 
 const NoteForm = () => {
   const navigate = useNavigate();
@@ -35,8 +34,8 @@ const NoteForm = () => {
   };
 
   return (
-    <div className="content-form">
-      <div className="content-form-card">
+    <div className="content-form-note">
+      <div className="content-form-note-card">
         <Formik
           initialValues={{
             title: selectNoteEdit.title,
@@ -48,33 +47,18 @@ const NoteForm = () => {
           enableReinitialize={true}
         >
           {({ handleSubmit, setFieldValue, isSubmitting }) => (
-            <Form className="content-form-card-form " onSubmit={handleSubmit}>
-              <header>
-                <h1 className="content-form-card-title ">New Note</h1>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="container-home-link-add-note"
-                >
-                  <span id="span1" />
-                  <span id="span2" />
-                  <span id="span3" />
-                  <span id="span4" />
-
-                  <div className="content-link">{selectNoteEdit.noteId ? "Update" : "Save"}</div>
-                </button>
+            <Form className="form-control" onSubmit={handleSubmit}>
+              <header className="form-control-header">
+                <h1 className="form-control-header-title ">New Note</h1>
+                <Button>
+                  <p>{selectNoteEdit.noteId ? "Update" : "Save"}</p>
+                </Button>
               </header>
 
-              <Field
-                type="text"
-                name="title"
-                placeholder="title"
-                className="content-form-card-input"
-              />
-              <ErrorMessage className="text-red-500 text-sm" name="title" component="div" />
+              <Field type="text" name="title" placeholder="title" className="form-control-input" />
+              <ErrorMessage className="form-control-message-error" name="title" component="div" />
 
-              <div className="card">
+              <div className="content-editor">
                 <Editor
                   apiKey={KEYS}
                   initialValue={selectNoteEdit.content}

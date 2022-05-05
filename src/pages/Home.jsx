@@ -1,19 +1,20 @@
-import { useGlobalContext } from "../context/context";
-import { Link } from "react-router-dom";
-import { IoMdAddCircle } from "react-icons/io";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context/context";
 
+import { IoMdAddCircle } from "react-icons/io";
 import Masonry from "react-masonry-css";
 
 import { Note } from "../components/Note";
+import { Button } from "../components/Button";
 
-import "../styles/home.scss";
+import img from "../utils/images/note.svg";
 
 const Colums = {
   default: 8,
-  2560: 7,
+  2650: 7,
   2325: 6,
-  1900: 5,
+  2050: 5,
   1770: 4,
   1250: 3,
   940: 2,
@@ -29,24 +30,25 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-home ">
-        <div className="link">
-          <Link to="/add" className="container-home-link-add-note">
-            <span id="span1" />
-            <span id="span2" />
-            <span id="span3" />
-            <span id="span4" />
-            <div className="content-link">
+      <div className="container-home">
+        <div className="container-home-activities">
+          <Link to="/add">
+            <Button>
               <IoMdAddCircle />
               <p>add new note</p>
-            </div>
+            </Button>
           </Link>
         </div>
-        {notes.length === 0 && <div>no tienes notas agrega una</div>}
+        {!notes.length === 0 && (
+          <div className="container-home-message">
+            <h1>You don't have a note, why not add one?</h1>
+            <img src={img} alt="" />
+          </div>
+        )}
         <Masonry
           breakpointCols={Colums}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
+          className="masonry-grid"
+          columnClassName="masonry-grid_column"
         >
           {notes.map((note, index) => (
             <Note key={index} note={note} />

@@ -1,0 +1,20 @@
+//lib
+@import "./lib/variables";
+@import "./lib/mixins";
+@import "./lib/placeholders";
+
+//layout
+@import "./layout/layout";
+
+//components
+@import "./components/note";
+@import "./components/popover";
+@import "./components/masonry";
+@import "./components/home";
+@import "./components/navbar";
+@import "./components/modal";
+@import "./components/cardNoteForm";
+@import "./components/account";
+@import "./components/btn";
+@import "./components/form";
+@import "./components/loading";

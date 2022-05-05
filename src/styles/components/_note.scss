@@ -1,0 +1,84 @@
+.container-card {
+  position: relative;
+  &-content {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px 20px 10px 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    width: 15em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    &-note {
+      transition: color 0.3s ease;
+
+      &-head {
+        transition: ease-in-out 0.2s;
+        .note-title {
+          margin: 10px 0px 0px;
+          font-size: 1.2em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .note-date {
+          position: absolute;
+          top: 6px;
+          right: 26px;
+          font-size: 12px;
+          color: #ccc;
+        }
+      }
+
+      &-body {
+        max-height: 380px;
+        overflow: hidden;
+        font-size: 12px;
+
+        pre {
+          background: #f5f2f0;
+          padding: 1em;
+          color: #333;
+        }
+      }
+      .table {
+        table {
+          border: 1px solid #fff;
+        }
+      }
+    }
+
+    &-icons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      opacity: 0;
+      transition: ease-in-out 0.2s;
+
+      button {
+        margin: 0px 2px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        font-size: 20px;
+        color: #ccc;
+        transition: ease-in-out 0.2s;
+
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+    &:hover &-icons {
+      opacity: 1;
+    }
+  }
+}

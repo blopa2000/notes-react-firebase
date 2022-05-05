@@ -1,0 +1,57 @@
+.form-control {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 960px) {
+    padding: 10px;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-title {
+      font-size: 2em;
+      font-weight: bold;
+      margin: 0;
+      display: inline-block;
+    }
+  }
+
+  &-input-label {
+    @extend %input-style;
+    margin-bottom: 20px;
+  }
+
+  &-input {
+    @extend %input-style;
+    margin-top: 20px;
+  }
+
+  &-message-error {
+    color: rgb(255, 126, 126);
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+
+  &-btn {
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #757575;
+    background-color: #ffffff;
+    width: 5em;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(247, 244, 244);
+    }
+  }
+  .btn-center {
+    margin: auto;
+  }
+}

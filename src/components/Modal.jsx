@@ -2,8 +2,6 @@ import ReactDOM from "react-dom";
 
 import { GrClose } from "react-icons/gr";
 
-import "../styles/modal.scss";
-
 const Modal = ({ children, handleIsOpenModal }) => {
   return ReactDOM.createPortal(
     <div>

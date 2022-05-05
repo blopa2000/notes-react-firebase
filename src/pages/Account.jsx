@@ -1,6 +1,5 @@
-import { useGlobalContext } from "../context/context";
 import { Navigate, useNavigate, Link } from "react-router-dom";
-import "../styles/login.scss";
+import { useGlobalContext } from "../context/context";
 
 const Account = ({ isLogin = true }) => {
   const navigate = useNavigate();
@@ -28,26 +27,26 @@ const Account = ({ isLogin = true }) => {
       {user ? (
         <Navigate to="/" replace />
       ) : (
-        <div className="container">
-          <div className="card-form">
-            <header>
-              <h1 className="card-title">Notes</h1>
-              <h3 className="card-subtitle">{isLogin ? "Login" : "signup"}</h3>
+        <div className="container-account">
+          <div className="container-account-card">
+            <header className="container-account-card-header">
+              <h1 className="title">Notes</h1>
+              <h3 className="subtitle">{isLogin ? "Login" : "signup"}</h3>
             </header>
 
-            <div className="content-form">
-              <form className="form" onSubmit={handleSubmit}>
+            <div>
+              <form className="container-account-card-form" onSubmit={handleSubmit}>
                 <input
                   type="email"
                   name="email"
                   placeholder="youEmail@enterprise.com"
-                  className="card-form-input"
+                  className="container-account-card-form-input"
                 />
                 <input
                   type="password"
                   name="password"
                   placeholder="Password"
-                  className="card-form-input"
+                  className="container-account-card-form-input"
                 />
 
                 {!isLogin && (
@@ -55,11 +54,11 @@ const Account = ({ isLogin = true }) => {
                     type="text"
                     name="name"
                     placeholder="your name"
-                    className="card-form-input"
+                    className="container-account-card-form-input"
                   />
                 )}
 
-                <div className="container-btn">
+                <div className="container-account-card-form-container-btn">
                   <button type="submit" className="btn">
                     {isLogin ? "Login" : "Signup"}
                   </button>

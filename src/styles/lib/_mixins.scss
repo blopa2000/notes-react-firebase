@@ -1,0 +1,16 @@
+@mixin button-line($name,$top,$left,$width,$height,$deg,$where,$element,$transition:0s) {
+  ##{$name} {
+    top: $top;
+    
+    left: $left;
+    width: $width;
+    height: $height;
+    background: linear-gradient($deg, transparent, #a945c7);
+  }
+  
+  &:hover ##{$name} {
+    #{$element}: $where;
+    transition: 1s;
+    transition-delay: $transition;
+  }
+}

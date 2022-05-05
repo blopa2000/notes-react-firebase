@@ -1,0 +1,23 @@
+%style-btn {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 4px;
+  transition: 0.2s;
+  overflow: hidden;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #a945c7;
+}
+
+%input-style{
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  font-size: 1em;
+  font-weight: bold;
+  color: #757575;
+  background-color: #ffffff;
+  width: 99.5%;
+}
