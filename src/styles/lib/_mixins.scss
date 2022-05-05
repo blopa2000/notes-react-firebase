@@ -5,7 +5,7 @@
     left: $left;
     width: $width;
     height: $height;
-    background: linear-gradient($deg, transparent, #a945c7);
+    background: linear-gradient($deg, transparent, $primary);
   }
   
   &:hover ##{$name} {

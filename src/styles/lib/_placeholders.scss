@@ -8,7 +8,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #a945c7;
+  color: $primary;
 }
 
 %input-style{
@@ -18,6 +18,6 @@
   font-size: 1em;
   font-weight: bold;
   color: #757575;
-  background-color: #ffffff;
+  background-color: $secondary;
   width: 99.5%;
 }

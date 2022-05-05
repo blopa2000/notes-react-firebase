@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { KEYS } from "../keys";
 import { configEditor } from "../constants";
 
-import { Button } from "./Button";
+import { Button } from "../components/Button";
 
 const NoteForm = () => {
   const navigate = useNavigate();

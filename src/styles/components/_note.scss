@@ -10,7 +10,8 @@
     width: 15em;
     cursor: pointer;
     transition: background 0.3s ease;
-
+    background: #fff;
+    
     &:hover {
       box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
     }
@@ -50,7 +51,7 @@
       }
       .table {
         table {
-          border: 1px solid #fff;
+          border: 1px solid $secondary;
         }
       }
     }
