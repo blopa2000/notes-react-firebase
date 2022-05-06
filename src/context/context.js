@@ -5,7 +5,14 @@ import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
-import { signInRequest, signupRequest, signOutRequest, updateUserRequest } from "../services/auth";
+import {
+  signInRequest,
+  signupRequest,
+  signOutRequest,
+  updateUserRequest,
+  resetPasswordRequest,
+  loginWithGoogleRequest,
+} from "../services/auth";
 import {
   getNotasRequest,
   deleteNoteRequest,
@@ -26,13 +33,17 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         const res = await getDoc(doc(db, "users", currentUser.uid));
-        dispatch({
-          type: "ADD_USER",
-          payload: {
-            uid: currentUser.uid,
-            ...res.data(),
-          },
-        });
+        if (res.exists()) {
+          dispatch({
+            type: "ADD_USER",
+            payload: {
+              uid: currentUser.uid,
+              ...res.data(),
+            },
+          });
+        } else {
+          logout();
+        }
       }
       setLoading(false);
     });
@@ -122,9 +133,23 @@ export const AuthProvider = ({ children }) => {
    * @returns
    */
 
-  const signup = (email, passwod, name) => signupRequest(email, passwod, name);
+  const signup = async (email, passwod, name) => {
+    try {
+      await signupRequest(email, passwod, name);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
 
-  const login = (email, passwork) => signInRequest(email, passwork);
+  const login = async (email, passwork) => {
+    try {
+      await signInRequest(email, passwork);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
 
   const logout = () => {
     dispatch({ type: "CLEAN_STATE" });
@@ -144,11 +169,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const resetPassword = (email) => {
+    try {
+      resetPasswordRequest(email);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    setLoading(true);
+    try {
+      const res = await loginWithGoogleRequest();
+      const user = await getDoc(doc(db, "users", res.user.uid));
+      if (!user.exists()) return false;
+    } catch (error) {
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const Account = {
     signup,
     login,
     logout,
     updateUser,
+    resetPassword,
+    loginWithGoogle,
   };
 
   const Notes = {

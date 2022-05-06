@@ -1,6 +1,13 @@
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 export const signupRequest = async (email, password, name) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -17,4 +24,11 @@ export const signOutRequest = async () => {
 
 export const updateUserRequest = async (user, dataUser) => {
   await setDoc(doc(db, "users", user.uid), { ...dataUser });
+};
+
+export const resetPasswordRequest = (email) => sendPasswordResetEmail(auth, email);
+
+export const loginWithGoogleRequest = () => {
+  const googleProvider = new GoogleAuthProvider();
+  return signInWithPopup(auth, googleProvider);
 };

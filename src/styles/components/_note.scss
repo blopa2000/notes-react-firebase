@@ -43,15 +43,19 @@
         overflow: hidden;
         font-size: 12px;
 
-        pre {
+        pre,code {
           background: #f5f2f0;
-          padding: 1em;
+          padding: 2px;
           color: #333;
+          border-radius: 5px;
         }
       }
-      .table {
+      .special-content {
         table {
           border: 1px solid $secondary;
+        }
+        a {
+          color: $secondary;
         }
       }
     }
@@ -63,18 +67,17 @@
       opacity: 0;
       transition: ease-in-out 0.2s;
 
-      button {
-        margin: 0px 2px;
-        border: none;
-        background: none;
-        cursor: pointer;
-        outline: none;
-        font-size: 20px;
-        color: #ccc;
-        transition: ease-in-out 0.2s;
-
+      .btn-note-black {
+        @extend %btn-style-icon;
         &:hover {
           color: #000;
+        }
+
+      }
+      .btn-note-white {
+        @extend %btn-style-icon;
+        &:hover {
+          color: #fff!important;
         }
       }
     }

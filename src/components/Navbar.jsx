@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useOuterClick } from "../hooks/useOuterClick";
 
@@ -12,6 +12,7 @@ import { Modal } from "./Modal";
 
 const Navbar = () => {
   const { logout, user, updateUser } = useGlobalContext();
+  const location = useLocation();
   const navigate = useNavigate();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -80,9 +81,11 @@ const Navbar = () => {
                     </button>
                   </Link>
                 </li>
-                <li>
-                  <button onClick={handleIsOpenModal}>Settings</button>
-                </li>
+                {location.pathname === "/" && (
+                  <li>
+                    <button onClick={handleIsOpenModal}>Settings</button>
+                  </li>
+                )}
                 <li>
                   <button onClick={handleLogout}>Logout</button>
                 </li>

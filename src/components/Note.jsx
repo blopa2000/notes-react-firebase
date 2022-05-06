@@ -76,7 +76,7 @@ const Note = ({ note }) => {
             </header>
             <div
               className={`container-card-content-note-body ${
-                bgColor === "#a088cc" || bgColor === "#cc88c4" ? "table" : ""
+                bgColor === "#a088cc" || bgColor === "#cc88c4" ? "special-content" : ""
               }`}
               onClick={(e) => (e.target.tagName === "A" ? e.stopPropagation() : null)}
               dangerouslySetInnerHTML={{ __html: content }}
@@ -89,6 +89,9 @@ const Note = ({ note }) => {
                 e.stopPropagation();
                 setActivePalette(!activePalette);
               }}
+              className={
+                bgColor === "#a088cc" || bgColor === "#cc88c4" ? "btn-note-white" : "btn-note-black"
+              }
             >
               <MdOutlineColorLens />
             </button>
@@ -97,6 +100,9 @@ const Note = ({ note }) => {
                 e.stopPropagation();
                 setIsOpenModal(true);
               }}
+              className={
+                bgColor === "#a088cc" || bgColor === "#cc88c4" ? "btn-note-white" : "btn-note-black"
+              }
             >
               <MdDeleteForever />
             </button>

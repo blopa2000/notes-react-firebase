@@ -21,3 +21,14 @@
   background-color: $secondary;
   width: 99.5%;
 }
+
+%btn-style-icon{
+  margin: 0px 2px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    color: #ccc;
+    transition: ease-in-out 0.2s;
+}
