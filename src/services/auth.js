@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import {
   signInWithEmailAndPassword,
@@ -23,7 +23,7 @@ export const signOutRequest = async () => {
 };
 
 export const updateUserRequest = async (user, dataUser) => {
-  await setDoc(doc(db, "users", user.uid), { ...dataUser });
+  await updateDoc(doc(db, "users", user.uid), { ...dataUser });
 };
 
 export const resetPasswordRequest = (email) => sendPasswordResetEmail(auth, email);
