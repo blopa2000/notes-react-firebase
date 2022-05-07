@@ -127,8 +127,11 @@ const Account = ({ isLogin = true }) => {
                 name: "",
               }}
               validationSchema={yup.object({
-                email: yup.string().required("Email is required"),
-                password: yup.string().required("Password is required"),
+                email: yup.string().required("Email is required").email("Invalid email"),
+                password: yup
+                  .string()
+                  .required("Password is required")
+                  .min(9, "Password must be at least 9 characters"),
               })}
               onSubmit={handleSubmit}
               enableReinitialize={true}

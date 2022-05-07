@@ -60,7 +60,7 @@ const Navbar = () => {
 
         <div className="navbar-content">
           <h3 className="navbar-content-user-name">{`Welcome ${
-            user?.name[0].toUpperCase() + user?.name.slice(1)
+            user?.name === "" ? "" : user?.name[0]?.toUpperCase() + user?.name?.slice(1)
           }`}</h3>
 
           <div className="navbar-content-menu" ref={menuRef}>
