@@ -34,7 +34,7 @@ function App() {
           />
 
           <Route
-            path="edit"
+            path="edit/:noteId"
             element={
               <Privateroute>
                 <NoteForm />

@@ -11,7 +11,7 @@ import { Modal } from "./Modal";
 
 const Note = ({ note }) => {
   const { noteId, title, content, date, bgColor, textColor } = note;
-  const { deleteNote, noteColor, selectNote } = useGlobalContext();
+  const { deleteNote, noteColor } = useGlobalContext();
   const [activePalette, setActivePalette] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -62,8 +62,7 @@ const Note = ({ note }) => {
           className="container-card-content"
           style={bgColor ? { background: bgColor } : {}}
           onClick={(e) => {
-            selectNote({ title, content, noteId });
-            navigate("/edit");
+            navigate(`/edit/${noteId}`);
           }}
         >
           <div
