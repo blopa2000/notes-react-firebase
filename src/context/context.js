@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useEffect, useReducer, useCallback } from "react";
+import { useContext, createContext, useState, useEffect, useReducer } from "react";
 import { Reducers, initialState } from "./Reducers";
 
 import { auth, db } from "../firebase";
@@ -14,7 +14,8 @@ import {
   loginWithGoogleRequest,
 } from "../services/auth";
 import {
-  getNotasRequest,
+  getNotesRequest,
+  getNoteRequest,
   deleteNoteRequest,
   addNoteRequest,
   updateNoteRequest,
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       if (!state.user) return;
-      const res = await getNotasRequest(state.user);
+      const res = await getNotesRequest(state.user);
       getNotes(res);
     })();
   }, [state.user]);
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       await addNoteRequest(state.user, title, content);
-      const res = await getNotasRequest(state.user);
+      const res = await getNotesRequest(state.user);
       getNotes(res);
       return true;
     } catch (error) {
@@ -102,7 +103,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       await updateNoteRequest(state.user, noteId, data, true);
-      const res = await getNotasRequest(state.user);
+      const res = await getNotesRequest(state.user);
       getNotes(res);
       return true;
     } catch (error) {
@@ -112,18 +113,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const selectNote = (payload) => {
-    dispatch({
-      type: "SELECT_NOTE",
-      payload,
-    });
+  const getNote = (noteId) => {
+    return getNoteRequest(state.user, noteId);
   };
-
-  const CleanSelectNote = useCallback(() => {
-    dispatch({
-      type: "CLEAN_SELECT_NOTE",
-    });
-  }, []);
 
   /**
    * USER
@@ -204,8 +196,7 @@ export const AuthProvider = ({ children }) => {
     addNote,
     deleteNote,
     noteColor,
-    selectNote,
-    CleanSelectNote,
+    getNote,
     updateNote,
   };
 

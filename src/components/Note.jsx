@@ -62,8 +62,7 @@ const Note = ({ note }) => {
           className="container-card-content"
           style={bgColor ? { background: bgColor } : {}}
           onClick={(e) => {
-            selectNote({ title, content, noteId });
-            navigate("/edit");
+            navigate(`/edit/${noteId}`);
           }}
         >
           <div

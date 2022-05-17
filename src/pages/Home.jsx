@@ -24,13 +24,9 @@ const Colums = {
 };
 
 const Home = () => {
-  const { notes, CleanSelectNote } = useGlobalContext();
+  const { notes } = useGlobalContext();
   const [searchNote, setSearchNote] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
-  useEffect(() => {
-    CleanSelectNote();
-  }, [CleanSelectNote]);
 
   useEffect(() => {
     setSearchNote(

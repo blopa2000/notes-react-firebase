@@ -3,6 +3,7 @@ import {
   addDoc,
   deleteDoc,
   getDocs,
+  getDoc,
   collection,
   query,
   orderBy,
@@ -12,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const getNotasRequest = async (user) => {
+export const getNotesRequest = async (user) => {
   try {
     const querySnapshot = await getDocs(
       query(collection(db, "users", user.uid, "notes"), orderBy("timestamp", "desc"))
@@ -28,6 +29,14 @@ export const getNotasRequest = async (user) => {
     });
 
     return auxNotes;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getNoteRequest = async (user, noteId) => {
+  try {
+    return await getDoc(doc(db, "users", user.uid, "notes", noteId));
   } catch (error) {
     console.error(error);
   }
