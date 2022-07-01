@@ -94,7 +94,7 @@ const NoteForm = () => {
                   <header className="form-control-header">
                     <h1 className="form-control-header-title ">New Note</h1>
                     <Button type="submit">
-                      <p>{noteId ? "Update" : "Save"}</p>
+                      <p>{noteId ? "Update note" : "Save note"}</p>
                     </Button>
                   </header>
 
