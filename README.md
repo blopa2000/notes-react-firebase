@@ -21,6 +21,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run build`
 
+### the deployment is done in firebase
+ like:[notes-react-1bf24.web.app/](https://notes-react-1bf24.web.app/)
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
